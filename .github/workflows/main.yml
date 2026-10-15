@@ -1,10 +1,11 @@
-name: CI Pipeline Test
+name: CI/CD Pipeline
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
+  # 1. CI Step: GitHub Cloud Runner
   test:
     runs-on: ubuntu-latest
 
@@ -12,7 +13,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: 1234
           MYSQL_DATABASE: crud_demo
         ports:
           - 3306:3306
@@ -36,5 +37,16 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_USER: root
-          DB_PASS: root
+          DB_PASS: 1234
           DB_NAME: crud_demo
+
+  # 2. CD Step: Local Runner
+  deploy:
+    needs: test
+    runs-on: self-hosted
+
+    steps:
+      - name: Deploy Code to Live Folder
+        run: |
+          cd /var/www/html/php-crud-live
+          git pull origin main
