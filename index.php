@@ -20,7 +20,7 @@ $tasks = $pdo->query("SELECT * FROM tasks ORDER BY id DESC")->fetchAll(PDO::FETC
 <html>
 <head><title>CI/CD CRUD Test</title></head>
 <body>
-    <h2>Task Manager (CI/CD Demo): Krishna Jaiswal</h2>
+    <h2>Task Manager (CI/CD Demo): Krishna Jaiswal : pratapgarh</h2>
     <form method="POST">
         <input type="text" name="title" placeholder="Enter task..." required>
         <button type="submit" name="add_task">Add</button>
