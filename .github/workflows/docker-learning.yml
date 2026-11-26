@@ -1,5 +1,5 @@
 
-name: Docker Learning - Day 2
+name: Docker Learning - Day 3
 
 on:
   workflow_dispatch:
@@ -8,24 +8,41 @@ on:
       - main
 
 jobs:
-  docker-build:
+  container-management:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Docker Version
-        run: docker --version
-
       - name: Build Docker Image
-        run: docker build -t php-crud-app:day2 .
+        run: docker build -t php-crud-app:day3 .
 
-      - name: List Docker Images
-        run: docker images
+      - name: Run Container
+        run: docker run -d --name my-container php-crud-app:day3 sleep 300
 
-      - name: Run Docker Container
-        run: docker run php-crud-app:day2
+      - name: Check Running Containers
+        run: docker ps
 
-      - name: Verify Container
+      - name: Inspect Container
+        run: docker inspect my-container
+
+      - name: Check Container Logs
+        run: docker logs my-container
+
+      - name: Stop Container
+        run: docker stop my-container
+
+      - name: Check All Containers
+        run: docker ps -a
+
+      - name: Start Container Again
+        run: docker start my-container
+
+      - name: Remove Container
+        run: |
+          docker stop my-container
+          docker rm my-container
+
+      - name: Verify Removal
         run: docker ps -a
