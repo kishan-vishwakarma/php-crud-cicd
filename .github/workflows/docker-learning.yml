@@ -1,5 +1,5 @@
 
-name: Docker Learning - Day 1
+name: Docker Learning - Day 2
 
 on:
   workflow_dispatch:
@@ -8,24 +8,24 @@ on:
       - main
 
 jobs:
-  docker-practice:
+  docker-build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Check Docker Version
+      - name: Docker Version
         run: docker --version
 
-      - name: Check Docker Info
-        run: docker info
+      - name: Build Docker Image
+        run: docker build -t php-crud-app:day2 .
 
-      - name: Check Docker Images
+      - name: List Docker Images
         run: docker images
 
-      - name: Check Running Containers
-        run: docker ps -a
+      - name: Run Docker Container
+        run: docker run php-crud-app:day2
 
-      - name: Docker Status
-        run: echo "Docker environment is ready!"
+      - name: Verify Container
+        run: docker ps -a
