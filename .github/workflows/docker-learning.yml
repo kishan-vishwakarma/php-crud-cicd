@@ -1,0 +1,31 @@
+
+name: Docker Learning - Day 1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-practice:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check Docker Version
+        run: docker --version
+
+      - name: Check Docker Info
+        run: docker info
+
+      - name: Check Docker Images
+        run: docker images
+
+      - name: Check Running Containers
+        run: docker ps -a
+
+      - name: Docker Status
+        run: echo "Docker environment is ready!"
